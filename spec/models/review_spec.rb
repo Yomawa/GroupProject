@@ -12,8 +12,4 @@ describe Review do
   # it {is_expected.to be(nil)} NEED TO SPECIFY RATING FIELD
 #should belong to user
   it {is_expected.to belong_to :user}
-#has many records
-  it {is_expected.to have_many :records}
-#has many schools through records
-  it {is_expected.to have_many(:schools).through(:records)}
 end
