@@ -9,5 +9,4 @@ require 'rails_helper'
     it {is_expected.to respond_to prop}
     it {is_expected.to validate_presence_of prop}
   end
-
 end

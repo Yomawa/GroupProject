@@ -1,3 +1,4 @@
+require 'rails_helper'
 #CRUD ON REVIEW: 
 feature "CRUD on reviews AS USER" do
   let(:user){User.create(email: 'test@test.com', username: 'test', password: 'password', is_admin: false)}

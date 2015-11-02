@@ -1,3 +1,4 @@
+require 'rails_helper'
 # REVIEW 
 describe Review do
 #has all attributes
