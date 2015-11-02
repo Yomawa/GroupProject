@@ -51,17 +51,24 @@ feature "update an existing school" do
     expect(school.address).to eq "44 Tehama St, San Francisco, CA 94105"
     expect(school.description).to eq "We believe in making education and growth accessible to anyone – especially underrepresented groups in the tech industry. Whether you’re a founder, student, or just someone who wants to level up their career, we want Galvanize to be a welcoming, inclusive place where you can take the next step in your journey."
   end
-    scenario "Failed update" do
-      ######write later
+    scenario "updeting a school without all required fields" do
+      within "form" do
+      fill_in "Name", with: "Galvanize"
+      fill_in "webpage", with: "www.galvanize.com"
+      fill_in "logo", with: ""
+      fill_in "address", with: "44 Tehama St, San Francisco, CA 94105"
+      fill_in "description", with: "We believe in making education and growth accessible to anyone – especially underrepresented groups in the tech industry. Whether you’re a founder, student, or just someone who wants to level up their career, we want Galvanize to be a welcoming, inclusive place where you can take the next step in your journey."
+    end
+    click_button "Update School"
+    expect(page).to have_content "Name can't be blank webpage can't be blank logo can't be blank address can't be blank description can't be blank"
   end
 end
 
 feature "delete a existing school" do
   scenario "sucessfully deleting" do
-    s = School.create(name:"Galvanize",webpage:"www.galvanize.com",logo:"logo.png",address:"44 Tehama St, San Francisco, CA 94105",description:"We believe in making education and growth accessible to anyone – especially underrepresented groups in the tech industry. Whether you’re a founder, student, or just someone who wants to level up their career, we want Galvanize to be a welcoming, inclusive place where you can take the next step in your journey.")
-    #check this line? not sure 
-    s.reviews.create(title: "test", description: "test", rating: "5stars")
-    #do we need to specifay a user???
+    user1 = User.create(username: "maja",password: "secret")
+    School.create(name: 'Galvanize', logo: 'logo', address: '44 Tehama St, San Francisco, CA 94105', description: "Galvanize Full Stack is a 24-week program that teaches you how to make an impact as a contributing member of a development team. The program culminates in hiring day, where students meet potential employers, present projects, and show off everything they’ve learned.")
+    user1.reviews.build(title: "Successful", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, sit! Qui repellendus reprehenderit ea, voluptas ullam assumenda quam atque quidem. Earum consectetur illo officia numquam voluptate officiis sed? Sint, nemo!", rating: "5 stars", school_id:1)
     visit schools_path
     click_link "Delete this school"
     expect(page).to have_content "Deleted"
