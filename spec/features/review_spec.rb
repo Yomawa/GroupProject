@@ -7,6 +7,7 @@ feature "CRUD on reviews AS USER" do
     background do
       visit new_school_review_path(school)
     end
+
     scenario "creating a new review with all required fields" do
       within "form" do
         fill_in "Title", with: "My First Review"
@@ -27,9 +28,12 @@ feature "CRUD on reviews AS USER" do
       end
       click_button "Create Review"
       expect(page).to have_content "Title can't be blank"
-      # ADD OTHER ERROR MESSAGES
+      expect(page).to have_content "Description can't be blank"
+      expect(page).to have_content "Rating can't be blank"
     end
   end
+
+
 feature "update an existing review" do
     let(:review){school.reviews.create(title:"Second Review", description: "Not Great.")}
     scenario "sucessfully updating" do
@@ -49,11 +53,19 @@ feature "update an existing review" do
 # ADD UNSUCCESSFUL UPDATE
   feature "delete a existing review" do
     background do
-      # create user. 
+      user = User.create(email: 'test@test.com', username: 'test', password: 'password', is_admin: false) 
       user.reviews.create(title:"Cool Experience", description: 'would do it again')
     end
     scenario "sucessfully deleting" do
-      # visit login_page AND OTHER STUFF. SEE TITANTIC APP
+      # visit login_page AND OTHER STUFF.
+      visit login_path
+        within "form" do
+            fill_in 'username', :with => user[:name]
+            fill_in 'password', :with => user[:password]
+        end
+        click_button "Log in"       
+        expect(page).to have_content "welcome"
+        expect(page.current_path).to eq home_path
       visit user_reviews_path(user)
       click_link "Delete this Review"
       expect(page).to have_content "Deleted"
@@ -67,8 +79,14 @@ feature "delete a existing assessment as Admin" do
       visit new_school_review_path(school)
     end
     scenario "sucessfully deleting" do
-      visit #ADMIN ROUTE AND LOGIN AND ALL THE STUFF
-      click_link "Delete this Review"
+   visit login_path
+        within "form" do
+            fill_in 'username', :with => 'admin'
+            fill_in 'password', :with => 'admin'
+        end
+        click_button "Log in"       
+        expect(page).to have_content "Admin"      
+        click_link "Delete this Review"
       expect(page).to have_content "Deleted"
       expect(Assessment.all.size).to eq 0
     end
