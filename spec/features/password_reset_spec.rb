@@ -24,14 +24,13 @@ feature "Forgotten passwords" do
     fill_in "Password", with: "newpassword1"
     click_button "Reset Password"
     expect(page).to have_content("Password updated.")
-    expect(page.current_path).to eq(users_path)
+    expect(page.current_path).to eq(home_path)
 
-    click_link "Logout"
-    expect(page).to have_content("Logged out")
+    click_link "Log out"
     visit login_path
-    fill_in "email", with: user.email
+    fill_in "username", with: user.username
     fill_in "password", with: "newpassword1"
-    click_button "Log In"
-    expect(page).to have_content("Welcome")
+    click_button "Log in"
+    expect(page).to have_content("My profile")
   end
 end

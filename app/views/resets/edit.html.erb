@@ -1,0 +1,9 @@
+<p>Change Your Password</p>
+
+<%= form_for :user, url:reset_path(@user.reset_token), method: :patch do |f|%>
+<%= f.label :password %>
+<%= f.password_field :password, autofocus: true%>
+
+<%= f.submit "Reset Password"%>
+
+<% end %>
