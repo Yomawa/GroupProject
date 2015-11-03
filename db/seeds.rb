@@ -7,6 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 #CONTENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore"
+User.delete_all
+School.delete_all
+Reviews.delete_all
+
 User.create(username: "admin", password: "admin", is_admin: true)
 user1 = User.create(username: "maja",password: "secret", email:"maja@gmail.com")
 user2 = User.create(username: "jane",password: "jane1", email:"jane@gmail.com")
