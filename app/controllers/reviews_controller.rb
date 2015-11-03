@@ -13,10 +13,11 @@ class ReviewsController < ApplicationController
 
   def create
     @user = User.find(session[:user_id])
-    @review = @User.reviews.build(review_params)
+    @review = @user.reviews.build(review_params)
     if @review.save
        flash[:create] = "You create a new review!"
-       redirect_to school_path(review.school)
+       binding.pry
+       redirect_to school_path(@review.school_id)
     else
         render :new
     end
@@ -54,7 +55,8 @@ class ReviewsController < ApplicationController
         params.require(:review).permit(
             :title,
             :description,
-            :rating
+            :rating,
+            :school_id
             )
     end
 
