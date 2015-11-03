@@ -15,9 +15,24 @@ class ResetsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(reset_token: params[:id])
   end
 
   def update
+    @user = User.find_by(reset_token: params[:id])
+      if params[:user][:password].present?
+        if @user && @user.update(user_params)
+          @user.update(reset_token: nil)
+          session[:user_id] = @user.id 
+          redirect_to home_path, flash: {success: "Password updated."}
+        else 
+          flash.now[:notice] = "We're sorry! Password Reset Error. Please try again"
+          render :edit
+        end
+      else 
+        flash.now[:alert] = "Please Enter a Password"
+        render :edit
+      end
   end
 
   def user_params
