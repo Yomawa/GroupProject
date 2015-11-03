@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   resources :users, shallow:true do 
       resources :reviews
   end
+  
+  resources :resets, only:[:new, :edit, :create, :update]
+ 
 end
