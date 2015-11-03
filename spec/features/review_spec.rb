@@ -88,6 +88,6 @@ feature "delete a existing assessment as Admin" do
         expect(page).to have_content "Admin"      
         click_link "Delete this Review"
       expect(page).to have_content "Deleted"
-      expect(Assessment.all.size).to eq 0
+      expect(Review.all.size).to eq 0
     end
   end
