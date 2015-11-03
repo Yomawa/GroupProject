@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
-  get 'resets/new,'
-
-  get 'resets/create,'
-
-  get 'resets/edit,'
-
-  get 'resets/update,'
-
-  get 'resets/user_params'
+  
 
   root 'sessions#home' 
 
@@ -23,4 +15,7 @@ Rails.application.routes.draw do
   resources :users, shallow:true do 
       resources :reviews
   end
+  
+  resources :resets, only:[:new, :edit, :create, :update]
+ 
 end

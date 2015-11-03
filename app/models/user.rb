@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
     has_many :reviews, dependent: :destroy
 
     def generate_password_reset_token!
-      update(password_reset_token: SecureRandom.urlsafe_base64(48))
+      update(reset_token: SecureRandom.urlsafe_base64(48))
   
     end
 end

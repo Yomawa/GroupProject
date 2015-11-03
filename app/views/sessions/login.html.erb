@@ -5,7 +5,6 @@
   <%= label_tag(:username)%>
   <%= text_field_tag(:username, params[:username], autofocus: true)%>
 
-
   <%= label_tag(:password)%>
   <%= password_field_tag(:password)%>
 
@@ -14,3 +13,4 @@
 <% end %>
 
 <%= link_to "Don't have an account? Sign up here", signup_path%>
+<%= link_to "Forgot your password?", new_reset_path%>
