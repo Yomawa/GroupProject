@@ -12,10 +12,11 @@ feature "Forgotten passwords" do
     expect {ActionMailer::Base.deliveries.count.to eq(1)}
   end
 
-  xscenario "resets password when following the email link" do
+  scenario "resets password when following the email link" do
     click_link "Forgot your password?"
     fill_in "Email", with: user.email
     click_button "Reset Password"
+    binding.pry
     open_email(user.email)
     current_email.click_link "here"
     expect(page).to have_content("Change Your Password")
