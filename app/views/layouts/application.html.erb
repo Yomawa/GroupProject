@@ -7,8 +7,60 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : ENV["FACEBOOK_APP_ID"],
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
 
-<%= yield %>
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <%= link_to "Login", login_path, class: "navbar-brand" %>
+            <%= link_to "Sign up", signup_path, class: "navbar-brand" %>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+          <% if current_user %>
+            <li><%= link_to "My profile", user_path(current_user) %></li>
+            <% if current_user.is_admin %>
+              <li><%= link_to "Admin tools", root_path %></li>
+            <% end %>
+            <li><%= link_to "Log out",  logout_path,  method: :delete %></li>
+          <% end %>
+          </ul>
+        </div>
+    </nav>
+    
+    <% flash.each do |key, value| %>
+      <% if key == "notice" %>
+        <%= content_tag :div, value, class: "text-center alert alert-warning" %>
+      <% elsif key == "alert" %>
+        <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+      <% elsif key == "create" %>
+        <%= content_tag :div, value, class: "text-center alert alert-success" %>
+      <% elsif key == "destroy" %>
+        <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+      <% elsif key == "update" %>
+        <%= content_tag :div, value, class: "text-center alert alert-warning" %>
+      <% else %>
+        <%= content_tag :div, value, class: "text-center alert alert-success" %>
+      <% end %>
+    <% end %>
 
+    <div class="container">
+        <%= yield %>
+    </div>
 </body>
 </html>
+
