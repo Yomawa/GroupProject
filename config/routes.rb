@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users, shallow:true do 
       resources :reviews
   end
+
+  get '/admin', to: "users#admin", as: 'admin'
   
   resources :resets, only:[:new, :edit, :create, :update]
  
