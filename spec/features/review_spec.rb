@@ -61,8 +61,11 @@ feature "update an existing review" do
       click_button "Log in"       
       expect(page).to have_content "My profile"
       expect(page.current_path).to eq root_path
-      review1.save 
-      visit edit_review_path(review1)
+      review1.save
+      click_link "My profile"
+      within "div#"+review1.id.to_s do
+        click_link "Edit"
+      end 
       within "form" do
         fill_in "Title", with: "Updated Review"
         fill_in "Description", with: "Just kidding, it was AWESOME"
@@ -86,11 +89,30 @@ feature "update an existing review" do
       expect(page).to have_content "My profile"
       expect(page.current_path).to eq root_path
       review1.save 
-      visit edit_review_path(review1)
+      click_link "My profile"
+      within "div#"+review1.id.to_s do
+        click_link "Edit"
+      end
       within "form" do
         fill_in "review_title", with: ""
       end
       click_button "Update Review"
       expect(page).to have_content "can't be blank"
   end
+  scenario "Delete a review" do
+    visit login_path
+      within "form" do
+          fill_in 'username', :with => user1.username
+          fill_in 'password', :with => user1.password
+      end
+      click_button "Log in"       
+      expect(page).to have_content "My profile"
+      expect(page.current_path).to eq root_path
+      review1.save 
+      click_link "My profile"
+      within "div#"+review1.id.to_s do
+        click_link "Delete"
+      end
+      expect(page).to have_content "Your review has been deleted"
+    end
 end
