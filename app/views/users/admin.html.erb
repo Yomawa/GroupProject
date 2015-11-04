@@ -3,23 +3,35 @@
 
 <!-- All School with edit/delete -->
 <h3>All Schools</h3>
-<ul>
+
   <% @schools.each do |school| %>
-    <li><%= school.name %><%= link_to "Delete School", school_path(school), method: :delete, data:{confirm: 'Do you really want to delete?'}%></li>
-    <% end %>
-</ul>
+    <div id="<%=school.id%>" >
+     <%= school.name %> 
+     <button class="adminDeleteSchool">Delete</button>
+     <!--  <li><%= school.name %><%= link_to "Delete School", school_path(school), method: :delete,class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
+    </div>
+  <% end %>
 <!-- All the Reviews with Delete -->
 <h3>All Reviews</h3>
-<ul>
+
   <% @reviews.each do |review| %>
-    <li><%= review.title %><%= link_to "Delete this Review", review_path(review), method: :delete, data:{confirm: 'Do you really want to delete?'}%></li>
+  <div id="<%=review.id%>" >
+    <%= review.title %>
+    <button class="adminDeleteReview">Delete</button>
+    <!-- <li><%= review.title %><%= link_to "Delete this Review", review_path(review),class:"adminDelete", method: :delete, data:{confirm: 'Do you really want to delete?'}%></li> -->
+  </div>
      <% end %>
-</ul>
+
 
 <!-- All the Users with Delete -->
 <h3>All Users</h3>
-<ul>
   <% @users.each do |user| %>
-    <li><%= user.username %><%= link_to "Delete User", user_path(user), method: :delete, data:{confirm: 'Do you really want to delete?'}%></li>
-     <% end %>
+  <div id="<%=user.id%>">
+    <%= user.username %>
+    <% unless user.is_admin %>
+    <button class="adminDeleteUser">Delete</button>
+  </div>
+    <% end %>
+    <!-- <li><%= user.username %><%= link_to "Delete User", user_path(user), method: :delete, class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
+  <% end %>
 </ul>
