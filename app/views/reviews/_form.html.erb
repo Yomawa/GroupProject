@@ -19,8 +19,9 @@
     <%= f.label :rating %>
     <%= f.text_field :rating %>
   </div>
+  <% if @school %>
     <%= f.hidden_field :school_id, value: @school.id %>
-
+  <% end %>
     <%= f.submit class: "btn btn-primary" %>
     
 <% end %>

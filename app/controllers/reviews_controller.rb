@@ -15,11 +15,11 @@ class ReviewsController < ApplicationController
     @user = User.find(session[:user_id])
     @review = @user.reviews.build(review_params)
     if @review.save
-       flash[:create] = "You create a new review!"
-       binding.pry
+       flash[:create] = "Successfully Created"
        redirect_to school_path(@review.school_id)
     else
-        render :new
+        flash[:create] = "can't be blank"
+        redirect_to "/users/#{@user.id}/reviews/new?school_id=#{review_params[:school_id]}"
     end
   end
 
@@ -35,8 +35,8 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @review.update(review_params)
     if @review.save
-        flash[:update] = "Your review has been updated!"
-        redirect_to review_path(@review)
+        flash[:update] = "Updated"
+        redirect_to school_path(@review.school_id)
     else
         render :edit
     end
