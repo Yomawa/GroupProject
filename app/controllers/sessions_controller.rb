@@ -1,23 +1,7 @@
 class SessionsController < ApplicationController
-    before_action :go_home, only: [:signup, :login]
-
-    def signup
-         @user = User.new 
-    end
-
-    def create
-        @user = User.create(user_params)
-        if @user.save
-            session[:user_id] = @user.id
-            flash[:notice] = "Welcome, you are now logged in!"
-            redirect_to root_path
-        else
-            render :signup
-        end
-    end
+    before_action :go_home, only: [:login]
 
     def login
-
     end
 
     def attempt_login
@@ -70,7 +54,7 @@ class SessionsController < ApplicationController
     end
 
     def go_home
-        if session[:user_id]
+        if current_user 
             redirect_to root_path
         end
     end

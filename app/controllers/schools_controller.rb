@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  before_action :is_admin, only: [:destroy, :edit, :update]
   def index
     @schools = School.all
   end
@@ -47,6 +48,12 @@ class SchoolsController < ApplicationController
   end
 
   private 
+
+  def is_admin
+    if !current_user.is_admin
+    redirect_to root_path
+    end
+  end
 
   def school_params
     params.require(:school).permit(:name, :logo, :webpage, :address, :description)

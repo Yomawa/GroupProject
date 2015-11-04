@@ -1,5 +1,7 @@
 class ReviewsController < ApplicationController
     before_action :current_logged, only: [:new, :edit]
+    before_action :oners_review, only: [:edit]
+    before_action :delete_review, only: [:destroy]
 
   def index
     @reviews = Review.all
@@ -29,6 +31,7 @@ class ReviewsController < ApplicationController
 
   def edit
     @review = Review.find(params[:id])
+
   end
 
   def update
@@ -58,6 +61,22 @@ class ReviewsController < ApplicationController
             :rating,
             :school_id
             )
+    end
+
+    def oners_review
+      @review = Review.find(params[:id])
+      if @review.user_id != current_user.id
+      redirect_to root_path
+      end
+    end
+
+    def delete_review
+      @review = Review.find(params[:id])
+      if !current_user.is_admin
+          if @review.user_id != current_user.id
+            redirect_to root_path
+          end
+      end
     end
 
     def current_logged
