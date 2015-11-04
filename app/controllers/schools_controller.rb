@@ -42,8 +42,9 @@ class SchoolsController < ApplicationController
   def destroy
     @school = School.find(params[:id])
     @school.destroy
-    flash[:destroy] = "Deleted"
-    redirect_to schools_path
+    # flash[:destroy] = "Deleted"
+    # redirect_to schools_path
+    render json: 'Deleted'
   end
 
   private 

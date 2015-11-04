@@ -1,9 +1,11 @@
 $(document).ready(function(){
+ 
+
+// ////// SCHOOL AJAX ////////
   $('body').on('click','.adminDeleteSchool', function(){
     $idnum = $(this).parent().attr('id');
     $(this).parent().remove();
-    console.log($idnum);
-    // console.log($idnum);
+
     $.ajax({
       type: 'DELETE',
       url: '/schools/'+ $idnum+'',
@@ -13,11 +15,22 @@ $(document).ready(function(){
     });
   });
 
-  $('body').on('click','.adminDeleteReview', function(){
+  $('body').on('click','.adminEditSchool', function(){
+    $idnum = $(this).parent().attr('id');
+    /// GRAB INFO FROM SCHOOL
+
+    // $(this).parent().replaceWith(
+    //   );
+  });
+    
+
+
+///// ADMIN REVIEW ////
+
+$('body').on('click','.adminDeleteReview', function(){
     $idnum = $(this).parent().attr('id');
     $(this).parent().remove();
-    console.log($idnum);
-    // console.log($idnum);
+
     $.ajax({
       type: 'DELETE',
       url: '/reviews/'+ $idnum+'',
@@ -27,11 +40,10 @@ $(document).ready(function(){
     });
   });
 
-    $('body').on('click','.adminDeleteUser', function(){
+ $('body').on('click','.adminDeleteUser', function(){
     $idnum = $(this).parent().attr('id');
     $(this).parent().remove();
-    console.log($idnum);
-    // console.log($idnum);
+
     $.ajax({
       type: 'DELETE',
       url: '/users/'+ $idnum+'',
