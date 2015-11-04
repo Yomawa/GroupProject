@@ -1,93 +1,96 @@
 require 'rails_helper'
 #CRUD ON REVIEW: 
 feature "CRUD on reviews AS USER" do
-  let(:user){User.create(email: 'test@test.com', username: 'test', password: 'password', is_admin: false)}
-  let(:school){School.create(name: 'Galvanize')}
-    
-    background do
-      visit new_school_review_path(school)
-    end
+
+  let(:user){User.create(email: 'test@test.com', username: 'test', password: 'password')}
+  let(:school){School.create(name: 'new thing', webpage: "www.galvanize.com",logo: 'logo', address: '44 Tehama St, San Francisco, CA 94105', description: "Galvanize Full Stack is a 24-week program that teaches you how to make an impact as a contributing member of a development team. The program culminates in hiring day, where students meet potential employers, present projects, and show off everything they’ve learned.")}
 
     scenario "creating a new review with all required fields" do
+      visit login_path
+      within "form" do
+          fill_in 'username', :with => user.username
+          fill_in 'password', :with => user.password
+      end
+      click_button "Log in"       
+      expect(page).to have_content "My profile"
+      expect(page.current_path).to eq root_path
+      visit school_path(school)
+      click_link "New Review"
       within "form" do
         fill_in "Title", with: "My First Review"
         fill_in "Description", with: "This school is great"
-        # FILL OUT RATING SYSTEM
+        fill_in "Rating", with: "5 stars"
       end
       click_button "Create Review"
       expect(page).to have_content "Successfully Created"
-      expect(page.current_path).to eq school_reviews_path
+      expect(page.current_path).to eq school_path(school)
       expect(page).to have_content "My First Review"
-      
     end
+
     scenario "creating a new review without all required fields" do
+      visit login_path
+      within "form" do
+          fill_in 'username', :with => user.username
+          fill_in 'password', :with => user.password
+      end
+      click_button "Log in"       
+      expect(page).to have_content "My profile"
+      expect(page.current_path).to eq root_path
+      visit school_path(school)
+      click_link "New Review"
       within "form" do
         fill_in "Title", with: ""
-        fill_in "Description", with: ""
-        # FILL OUT RATING SYSTEM
       end
       click_button "Create Review"
-      expect(page).to have_content "Title can't be blank"
-      expect(page).to have_content "Description can't be blank"
-      expect(page).to have_content "Rating can't be blank"
+      expect(page).to have_content "can't be blank"
     end
-  end
+end
 
 
 feature "update an existing review" do
-    let(:review){school.reviews.create(title:"Second Review", description: "Not Great.")}
-    scenario "sucessfully updating" do
-      visit edit_review_path(review)
+  let(:user1){User.create(username: "usery",password: "secret", email:"usery@gmail.com")} 
+    let(:school1){School.create(name: 'school 1', webpage: "www.galvanize.com",logo: 'logo', address: '44 Tehama St, San Francisco, CA 94105', description: "Galvanize Full Stack is a 24-week program that teaches you how to make an impact as a contributing member of a development team. The program culminates in hiring day, where students meet potential employers, present projects, and show off everything they’ve learned.")}
+    let(:review1){user1.reviews.build(title: "Successful new", description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, sit! Qui repellendus reprehenderit ea, voluptas ullam assumenda quam atque quidem. Earum consectetur illo officia numquam voluptate officiis sed? Sint, nemo!", rating: "5 stars", school_id:school1.id)}
+
+  scenario "sucessfully updating" do
+    visit login_path
+      within "form" do
+          fill_in 'username', :with => user1.username
+          fill_in 'password', :with => user1.password
+      end
+      click_button "Log in"       
+      expect(page).to have_content "My profile"
+      expect(page.current_path).to eq root_path
+      review1.save 
+      visit edit_review_path(review1)
       within "form" do
         fill_in "Title", with: "Updated Review"
         fill_in "Description", with: "Just kidding, it was AWESOME"
+        fill_in "Rating", with: "3 stars"
       end
       click_button "Update Review"
       expect(page).to have_content "Updated"
-      assessment.reload
-      expect(assessment.title).to eq "Updated Review"
-      expect(page.current_path).to eq school_reviews_path(review.school)
-      expect(assessment.description).to eq "Just kidding, it was AWESOME"
-    end
+      review1.reload
+      expect(review1.title).to eq "Updated Review"
+      expect(review1.description).to eq "Just kidding, it was AWESOME"
+      expect(page.current_path).to eq school_path(school1)
   end
-# ADD UNSUCCESSFUL UPDATE
-  feature "delete a existing review" do
-    background do
-      user = User.create(email: 'test@test.com', username: 'test', password: 'password', is_admin: false) 
-      user.reviews.create(title:"Cool Experience", description: 'would do it again')
-    end
-    scenario "sucessfully deleting" do
-      # visit login_page AND OTHER STUFF.
-      visit login_path
-        within "form" do
-            fill_in 'username', :with => user[:name]
-            fill_in 'password', :with => user[:password]
-        end
-        click_button "Log in"       
-        expect(page).to have_content "welcome"
-        expect(page.current_path).to eq home_path
-      visit user_reviews_path(user)
-      click_link "Delete this Review"
-      expect(page).to have_content "Deleted"
-      expect(Assessment.all.size).to eq 0
-    end
+
+  scenario "Update fail" do
+    visit login_path
+      within "form" do
+          fill_in 'username', :with => user1.username
+          fill_in 'password', :with => user1.password
+      end
+      click_button "Log in"       
+      expect(page).to have_content "My profile"
+      expect(page.current_path).to eq root_path
+      review1.save 
+      visit edit_review_path(review1)
+      within "form" do
+        fill_in "review_title", with: ""
+      end
+      click_button "Update Review"
+      expect(page).to have_content "can't be blank"
   end
-# DELETING REVIEW AS ADMIN
-feature "delete a existing assessment as Admin" do
-    background do
-      user.reviews.create(title:"Cool Experience", description: 'would do it again')
-      visit new_school_review_path(school)
-    end
-    scenario "sucessfully deleting" do
-   visit login_path
-        within "form" do
-            fill_in 'username', :with => 'admin'
-            fill_in 'password', :with => 'admin'
-        end
-        click_button "Log in"       
-        expect(page).to have_content "Admin"      
-        click_link "Delete this Review"
-      expect(page).to have_content "Deleted"
-      expect(Review.all.size).to eq 0
-    end
-  end
+end
