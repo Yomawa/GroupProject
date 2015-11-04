@@ -93,19 +93,4 @@ feature "update an existing review" do
       click_button "Update Review"
       expect(page).to have_content "can't be blank"
   end
-
-  scenario "sucessfully deleting" do
-    visit login_path
-      within "form" do
-          fill_in 'username', :with => user1[:username]
-          fill_in 'password', :with => user1[:password]
-      end
-      click_button "Log in"       
-      expect(page).to have_content "My profile"
-      expect(page.current_path).to eq home_path
-    visit user_reviews_path(user1)
-    click_link "Delete this Review"
-    expect(page).to have_content "Deleted"
-    expect(Review.all.size).to eq 0
-  end
 end
