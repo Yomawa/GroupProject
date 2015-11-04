@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "figaro"
 # Use Unicorn as the app server
 # gem 'unicorn'
+# Handlebars for single page templates
+gem 'handlebars_assets'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
