@@ -33,16 +33,25 @@ class SchoolsController < ApplicationController
   end
 
   def update
-    @school = School.find(params[:id])
-    @school.update(school_params)
-    #binding.pry
-    if @school.save
-      flash[:update] = "Updated"
-      redirect_to schools_path(@school)
-    else
-      #redirect_to "/schools/#{@school.id}/edit"
-      render :edit
-    end
+    respond_to do |format|
+      @school = School.find(params[:id])
+      @school.update(school_params)
+        format.html {
+            if @school.save
+              flash[:update] = "Updated"
+              redirect_to schools_path(@school)
+            else
+              #redirect_to "/schools/#{@school.id}/edit"
+              render :edit
+            end }
+      format.json {
+        if @school.save
+          render json: @school
+        else 
+          render json: {errors: @school.errors.full_messages}
+        end
+      }
+    end      
   end
 
   def destroy
