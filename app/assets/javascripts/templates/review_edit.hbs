@@ -1,0 +1,18 @@
+<form class="edit_review">
+  <div class = "form-group">
+    <label for="review_title">Title</label>
+    <input type="text" value={{title}} name="review[title]" id="review_title" />
+  </div>
+
+  <div class = "form-group">
+    <label for="review_description">Description</label>
+    <input type="text" value={{description}} name="review[description]" id="review_description" />
+  </div>
+
+  <div class = "form-group">
+    <label for="review_rating">Rating</label>
+    <input type="text" value={{rating}} name="review[rating]" id="review_rating" />
+  </div>
+    <input type="submit" name="commit" value="Update Review" class="btn btn-primary reviewEdit" />
+    
+</form>

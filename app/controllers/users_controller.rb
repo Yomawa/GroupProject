@@ -21,7 +21,12 @@ class UsersController < ApplicationController
   end
 
   def show
-     @user = User.find(params[:id])
+     respond_to do |format|
+      format.html {
+        @user = User.find(params[:id])
+        @user}
+      
+    end
   end
 
   def edit

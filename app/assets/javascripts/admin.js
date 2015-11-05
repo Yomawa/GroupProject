@@ -21,7 +21,7 @@ $(document).ready(function(){
     /// GRAB INFO FROM SCHOOL
     $.ajax({
       type: 'GET',
-      url: '/schools/'+ $idnum+'',
+      url: '/schools/'+ $idnum,
       dataType: 'json'
     }).success(function(response){
       console.log(response);
