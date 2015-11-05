@@ -1,35 +1,33 @@
 require 'rails_helper'
-feature "create a new school" do
+# feature "create a new school" do
+#   scenario "creating a new school with all required fields" do
+#     visit admin_path
+#     within "form" do
+#       fill_in "school_name", :with => "Galvanize"
+#       fill_in "school_webpage", :with => "www.galvanize.com"
+#       fill_in "school_logo", :with => "img"
+#       fill_in "school_address", :with => "44 Tehama St, San Francisco, CA 94105"
+#       fill_in "school_description", :with => "We believe"
+#     end
+#     click_button "Create School"
+#     #binding.pry
+#     expect(page).to have_content "Successfully Created"
+#     expect(page.current_path).to eq schools_path
+#   end
 
-
-  scenario "creating a new school with all required fields" do
-    visit new_school_path
-    within "form" do
-      fill_in "school_name", :with => "Galvanize"
-      fill_in "school_webpage", :with => "www.galvanize.com"
-      fill_in "school_logo", :with => "img"
-      fill_in "school_address", :with => "44 Tehama St, San Francisco, CA 94105"
-      fill_in "school_description", :with => "We believe"
-    end
-    click_button "Create School"
-    #binding.pry
-    expect(page).to have_content "Successfully Created"
-    expect(page.current_path).to eq schools_path
-  end
-
-  scenario "creating a new school blank fields" do
-    visit new_school_path
-    within "form" do
-      fill_in "school_name", :with => ""
-      fill_in "school_webpage", :with => ""
-      fill_in "school_logo", :with => ""
-      fill_in "school_address", :with => ""
-      fill_in "school_description", :with => ""
-    end
-    click_button "Create School"
-    expect(page).to have_content "can't be blank"
-  end
-end
+#   scenario "creating a new school blank fields" do
+#     visit new_school_path
+#     within "form" do
+#       fill_in "school_name", :with => ""
+#       fill_in "school_webpage", :with => ""
+#       fill_in "school_logo", :with => ""
+#       fill_in "school_address", :with => ""
+#       fill_in "school_description", :with => ""
+#     end
+#     click_button "Create School"
+#     expect(page).to have_content "can't be blank"
+#   end
+# end
 
 # feature "update an existing school" do
 #     #save_and_open_page

@@ -25,6 +25,7 @@ $(document).ready(function(){
       url: '/reviews/'+ $idnum,
       dataType: 'json'
     }).done(function(response){
+      console.log(response);
       $this.parent().replaceWith(
         $(HandlebarsTemplates['review_edit'](response)));
     }).fail(function(err){
@@ -38,7 +39,7 @@ $(document).ready(function(){
       var $editForm = $(".edit_review");
       var title = $('#review_title').val();
       var rating = $('#review_rating').val();
-      var description= $('#review_description').val(); 
+      var description = $('#review_description').val(); 
       var data = {review: {title:title, rating:rating, description:description}};
     $.ajax({
       type: 'PUT',
