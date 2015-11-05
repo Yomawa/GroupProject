@@ -16,21 +16,23 @@ $(document).ready(function(){
   });
 
   $('body').on('click','.adminEditSchool', function(){
+
     $idnum = $(this).parent().attr('id');
-    $this = $(this);
+    var $this = $(this);
     /// GRAB INFO FROM SCHOOL
     $.ajax({
       type: 'GET',
       url: '/schools/'+ $idnum,
       dataType: 'json'
-    }).success(function(response){
-      console.log(response);
+    }).done(function(response){
       $this.parent().replaceWith(
         $(HandlebarsTemplates['edit'](response)));
     });
     });
    
-$('body').on('click','.adminUpdate', function(){
+$('body').on('click','.adminUpdate', function(e){
+    e.preventDefault();
+    var $editForm = $(".edit_school");
     var name = $('#school_name').val(); // How can you access the subject text from the form?
     var webpage = $('#school_webpage').val();
     var logo = $('#school_logo').val();
@@ -44,10 +46,15 @@ $('body').on('click','.adminUpdate', function(){
       url: '/schools/'+ $idnum,
       dataType: 'json',
       data:data
-    }).success(function(response){
-      console.log(response);
-      $(".edit_school").replaceWith(
-        $(HandlebarsTemplates['show'](response)));
+    }).done(function(response){
+      if (response.errors){
+        response.errors.forEach(function(el, index, array){
+        $editForm.prepend( "<p>"+el+"</p>" );
+        });
+      } else {
+        $(".edit_school").replaceWith(
+          $(HandlebarsTemplates['show'](response)));
+      }
     });
     });  
 

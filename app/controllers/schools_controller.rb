@@ -50,6 +50,7 @@ class SchoolsController < ApplicationController
           render json: @school
         else 
           render json: {errors: @school.errors.full_messages}     
+          
         end
       }
     end      
