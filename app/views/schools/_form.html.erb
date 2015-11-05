@@ -1,33 +1,57 @@
-<% if @school.errors.any? %>
-  <% @school.errors.full_messages.each do |error|%>
-    <p class="text-danger"> *<%=error%></p>
-  <% end %>
-<%end%>
+<div class="col-lg-2">
+  <!-- space -->
+</div>
+<div class="col-lg-8">
+<div class="form-horizontal">
+  <fieldset>
+    <% if @school.errors.any? %>
+      <% @school.errors.full_messages.each do |error|%>
+        <p class="text-danger"> *<%=error%></p>
+      <% end %>
+    <%end%>
 
-<%= form_for @school do |f| %>
-  <div class = "form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
 
-  <div class = "form-group">
-    <%= f.label :webpage %>
-    <%= f.text_field :webpage %>
-  </div>
+    <%= form_for @school do |f| %>
+      <div class = "form-group">
+        <label class="col-lg-2 control-label"><%= f.label :name %></label>
+        <div class="col-lg-10">
+          <%= f.text_field :name, class: "form-control",required: true %>
+        </div>
+      </div>
 
-  <div class = "form-group">
-    <%= f.label :logo %>
-    <%= f.text_field :logo %>
-  </div>
+      <div class = "form-group">
+        <label class="col-lg-2 control-label"><%= f.label :webpage %></label>
+        <div class="col-lg-10">
+          <%= f.text_field :webpage, class: "form-control",required: true %>
+        </div>
+      </div>
 
-  <div class = "form-group">
-    <%= f.label :address %>
-    <%= f.text_field :address %>
-  </div>
+      <div class = "form-group">
+        <label class="col-lg-2 control-label"><%= f.label :logo %></label>
+        <div class="col-lg-10">
+          <%= f.text_field :logo, class: "form-control",required: true %>
+        </div>
+      </div>
 
-  <div class = "form-group">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
- </div>
-    <%= f.submit class: "btn btn-primary" %>
-<% end %>
+      <div class = "form-group">
+        <label class="col-lg-2 control-label"><%= f.label :address %></label>
+        <div class="col-lg-10">
+          <%= f.text_field :address, class: "form-control",required: true %>
+        </div>
+      </div>
+
+      <div class = "form-group">
+        <label class="col-lg-2 control-label"><%= f.label :description %></label>
+        <div class="col-lg-10">
+          <%= f.text_area :description, size: "50x5", class: "form-control",required: true %>
+        </div>
+     </div>
+        <%= f.submit class: "btn btn-primary" %> <br><br>
+    <% end %>
+<fieldset>
+</div>
+</div>
+<div class="col-lg-2">
+  <!-- space -->
+</div>
+

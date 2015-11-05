@@ -1,28 +1,49 @@
 <div class="panel panel-default text-center" style="width:100%">
     <div class="panel-body">
-        <h1>School Page</h1>
+        <h1><%= @school.name %></h1>
+        <hr>
     </div>
     <ul class="list-group">
         <li class="list-group-item">
-            <img src="<%= @school.logo %>" class="logoSchool">
-            <p><%= @school.name %></p>
-            <a href="<%= @school.webpage %>"><%= @school.webpage %></a>
-            <p><%= @school.address %></p>
-            <p><%= @school.description %></p>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <img src="<%= @school.logo %>" class="logoSchool">
+                    <p><%= @school.name %></p>
+                    <a href="<%= @school.webpage %>"><%= @school.webpage %></a>
+                    <p><%= @school.address %></p>
+                </div>
+                <div class="col-md-7"><br><br>
+                    <p><%= @school.description %></p>
+                </div>
+                <div class="col-md-1"></div>
+            </div> 
         </li>   
         <li class="list-group-item">
-            <h3>REVIEWS</h3>
+            <hr>
+            <h2>REVIEWS</h2>
             <% @school.reviews.each do |review| %>
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="<%= review.user.picture %>" class="miniPicture">
-                    <%= review.user.username %> 
+            <hr>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8"><h4><%= review.title %></h4></div>
+                    <div class="col-md-1"></div>
                 </div>
-                <div class="col-md-3"><%= review.title %></div>
-                <div class="col-md-3"><%= review.description %></div>
-                <div class="col-md-3"><%= review.rating %></div>
-            </div><br>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-2">
+                        <img src="<%= review.user.picture %>" class="miniPicture"><br>
+                        <%= review.user.username %>
+                    </div>
+                    <div class="col-md-8 text-justify">
+                    <%= review.description %>
+                    <h4>Rating: <%= review.rating %></h4>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
             <% end %>
+            <hr>
             <% if current_user %> 
                 <%= link_to 'New Review', new_user_review_path(current_user, school_id: @school.id), class:"btn btn-success" %>
             <% else %> 
