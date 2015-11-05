@@ -19,7 +19,13 @@ class SchoolsController < ApplicationController
   end
 
   def show
-    @school = School.find(params[:id])
+    respond_to do |format|
+      @school = School.find(params[:id])
+      format.html {@school}
+      format.json {render json: @school}
+    end    
+          
+
   end
 
   def edit

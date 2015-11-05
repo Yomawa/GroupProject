@@ -17,11 +17,21 @@ $(document).ready(function(){
 
   $('body').on('click','.adminEditSchool', function(){
     $idnum = $(this).parent().attr('id');
+    $this = $(this);
     /// GRAB INFO FROM SCHOOL
+    $.ajax({
+      type: 'GET',
+      url: '/schools/'+ $idnum+'',
+      dataType: 'json'
+    }).success(function(response){
+      console.log(response);
+      $this.parent().replaceWith(
+        $(HandlebarsTemplates['edit'](response)));
+    });
+    });
+   
+        
 
-    // $(this).parent().replaceWith(
-    //   );
-  });
     
 
 
@@ -52,4 +62,5 @@ $('body').on('click','.adminDeleteReview', function(){
       console.log(response);
     });
   });
+
 });
