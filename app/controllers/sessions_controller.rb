@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     end
 
     def home
-      
+        @schools = School.all
     end
 
     private

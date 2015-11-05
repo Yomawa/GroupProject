@@ -1,16 +1,28 @@
-<h1>Sessions#login</h1>
+<div class="panel panel-default text-center" style="width:100%">
+    <div class="panel-body">
+      <h1>Login</h1>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <%= form_tag(login_path) do %>
+                <h3><%= label_tag(:username)%></h3>  
+                <%= text_field_tag(:username, params[:username], autofocus: true)%> 
 
-<%= form_tag(login_path) do %>
+                <h3><%= label_tag(:password)%></h3> 
+                <%= password_field_tag(:password)%> <br><br>
 
-  <%= label_tag(:username)%>
-  <%= text_field_tag(:username, params[:username], autofocus: true)%>
+                <%= submit_tag("Log in", class: "btn btn-success btn-lg") %> <br><br>
 
-  <%= label_tag(:password)%>
-  <%= password_field_tag(:password)%>
+            <% end %>
+            Don't have an account? <%= link_to "Sign up here!", signup_path%> <br>
+            <%= link_to "Forgot your password?", new_reset_path%> <br>
+        </li>   
+    </ul>
+</div>
 
-  <%= submit_tag("Log in", class: "btn btn-primary") %>
 
-<% end %>
 
-<%= link_to "Don't have an account? Sign up here", signup_path%>
-<%= link_to "Forgot your password?", new_reset_path%>
+
+
+
+  

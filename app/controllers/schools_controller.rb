@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_action :is_admin, only: [:destroy, :edit, :update]
+  before_action :is_admin, only: [:destroy, :edit, :update, :new]
   def index
     @schools = School.all
   end

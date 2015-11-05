@@ -1,26 +1,48 @@
-<h1>Signup</h1>
+<div class="panel panel-default text-center" style="width:100%">
+    <div class="panel-body">
+      <h1>Signup</h1>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+        <% if @user.errors.any? %>
+            <% @user.errors.full_messages.each do |error| %>
+                <p class="text-danger"> * <%= error %> </p>
+            <% end %>
+        <% end %> 
+        <%= form_for(@user, url: signup_path) do |f|%>
+        <div class="row">
+            <%= label_tag(:email)%> <br> 
+            <%= f.text_field :email, autofocus: true, required: true, :placeholder => "mail@mail.com" %> <br>
+            <%= label_tag(:username)%> <br>
+            <%= f.text_field :username, required: true %> <br>
+            <%= label_tag(:password)%> <br>
+            <%= f.password_field :password, required: true %> <br>
+            <%= label_tag(:picture)%> <br>
+            <%= f.text_field :picture, required: true, :placeholder => ".com/mypicture.jpg" %> <br>
+            <%= label_tag(:contact_link)%> <br>
+            <%= f.text_field :contact_link, required: true, :placeholder => "@mytwitter" %> <br>
+            <p> <%= label_tag(:bio)%> </p>
+            <p><%= f.text_area :bio, required: true, size: "50x5", :placeholder => "Something about you..." %></p>
 
-<% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |error| %>
-        <p class="text-danger"> * <%= error %> </p>
-    <% end %>
-<% end %> 
+            <p><%= f.submit "Signup", class: "btn btn-success btn-lg" %></p>
 
-<%= form_for(@user, url: signup_path) do |f|%>
-    <p> <%= label_tag(:email)%> </p>
-    <p><%= f.text_field :email, autofocus: true %></p>
-    <p> <%= label_tag(:username)%> </p>
-    <p><%= f.text_field :username, required: true %></p>
-    <p> <%= label_tag(:password)%> </p>
-    <p><%= f.password_field :password, required: true %></p>
-    <p> <%= label_tag(:picture)%> </p>
-    <p><%= f.text_field :picture, required: true %></p>
-    <p> <%= label_tag(:bio)%> </p>
-    <p><%= f.text_field :bio, required: true %></p>
-    <p> <%= label_tag(:contact_link)%> </p>
-    <p><%= f.text_field :contact_link, required: true %></p>
+            <%= link_to "Have an account already? Log in here", login_path %>
+        </div>
+            
+        <% end %> 
+             
 
-    <p><%= f.submit "Signup", class: "btn btn-primary" %></p>
+        </li>   
+    </ul>
+</div>
 
-    <%= link_to "Have an account already? Log in here", login_path %>
-<% end %> 
+
+
+
+
+
+
+
+
+
+
