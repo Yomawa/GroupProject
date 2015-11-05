@@ -1,5 +1,5 @@
 class SchoolsController < ApplicationController
-  before_action :is_admin, only: [:destroy, :edit, :update]
+  before_action :is_admin, only: [:destroy, :edit, :update, :new]
   def index
     @schools = School.all
   end
@@ -13,7 +13,7 @@ class SchoolsController < ApplicationController
     #binding.pry
     if @school.save
       flash[:create] = "Successfully Created"
-      redirect_to schools_path
+      redirect_to admin_path
     else
       render :new
     end
