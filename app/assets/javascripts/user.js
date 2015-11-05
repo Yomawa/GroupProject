@@ -41,8 +41,10 @@ $(document).ready(function(){
     $.ajax({
       type: 'PUT',
       url: '/reviews/'+ $idnum,
-      dataType: 'json'
+      dataType: 'json',
+      data:data
     }).done(function(response){
+      console.log(response);
       $('edit_review').replaceWith(
         $(HandlebarsTemplates['review_show'](response)));
     }).fail(function(err){
