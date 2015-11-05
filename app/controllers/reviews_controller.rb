@@ -48,8 +48,9 @@ class ReviewsController < ApplicationController
   def destroy
     @review = Review.find(params[:id])
     @review.destroy
-    flash[:destroy] = "Your review has been deleted!"
-    redirect_to root_path
+    # flash[:destroy] = "Your review has been deleted!"
+    render json: "GGGRRRR"
+    # redirect_to root_path
   end
 
   private
