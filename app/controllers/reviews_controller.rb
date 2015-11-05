@@ -27,6 +27,7 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
+    render json: @review
   end
 
   def edit
@@ -35,13 +36,22 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = Review.find(params[:id])
-    @review.update(review_params)
-    if @review.save
-        flash[:update] = "Updated"
-        redirect_to school_path(@review.school_id)
-    else
-        render :edit
+    respond_to do |format|
+      @review = Review.find(params[:id])
+      @review.update(review_params)
+        format.html {
+          if @review.save
+            flash[:update] = "Updated"
+            redirect_to school_path(@review.school_id)
+          else
+            render :edit
+          end }
+        format.json {
+        if @review.save
+          render json: @review
+        else 
+          render json: {errors: @review.errors.full_messages}
+        end}
     end
   end
 

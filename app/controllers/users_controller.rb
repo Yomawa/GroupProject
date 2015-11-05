@@ -21,11 +21,27 @@ class UsersController < ApplicationController
   end
 
   def show
-     @user = User.find(params[:id])
+      respond_to do |format|
+      @user = User.find(params[:id])
+
+      format.html {@user}
+      format.json {render json: @user}
+    end
   end
 
   def edit
   end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    if @user.save
+      render json: @user
+    else 
+      render json: {errors: @user.errors.full_messages}     
+    end
+  end
+
 
   def admin
     @schools = School.all
@@ -59,6 +75,10 @@ class UsersController < ApplicationController
     if current_user.id != params[:id].to_i
     redirect_to root_path
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:password, :username, :email, :picture, :bio, :contact_link)
   end
 
 end

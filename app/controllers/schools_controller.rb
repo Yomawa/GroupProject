@@ -49,7 +49,8 @@ class SchoolsController < ApplicationController
         if @school.save
           render json: @school
         else 
-          render json: {errors: @school.errors.full_messages}
+          render json: {errors: @school.errors.full_messages}     
+          
         end
       }
     end      
