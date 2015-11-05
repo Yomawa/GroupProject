@@ -32,8 +32,10 @@ $(document).ready(function(){
     });
     });
 
-     $('body').on('click','.reviewEdit', function(){
+     $('body').on('click','.reviewEdit', function(e){
+      e.preventDefault();
     /// GRAB INFO FROM EDIT FORM
+      var $editForm = $(".edit_review");
       var title = $('#review_title').val();
       var rating = $('#review_rating').val();
       var description= $('#review_description').val(); 
@@ -44,13 +46,17 @@ $(document).ready(function(){
       dataType: 'json',
       data:data
     }).done(function(response){
-      console.log(response);
-      $('edit_review').replaceWith(
-        $(HandlebarsTemplates['review_show'](response)));
-    }).fail(function(err){
-      console.log("EDIT FAIL!!!", err);
+        if (response.errors){
+        response.errors.forEach(function(el, index, array){
+        $editForm.prepend( "<p>"+el+"</p>" );
+        });
+      } else {
+        $('.edit_review').replaceWith(
+          $(HandlebarsTemplates['review_show'](response)));
+        }
     });
-    });
+  });
+
 
 //////// EDITING USER INFO ////
     $('body').on('click','.userEdit', function(){
@@ -72,8 +78,10 @@ $(document).ready(function(){
 
     });
 
-     $('body').on('click','.userEditSub', function(){
+     $('body').on('click','.userEditSub', function(e){
+      e.preventDefault();
     /// GRAB INFO FROM EDIT FORM
+      var $editForm = $(".edit_user");
       var username = $('#user_username').val();
       var email = $('#user_email').val();
       var picture= $('#user_picture').val(); 
@@ -87,12 +95,15 @@ $(document).ready(function(){
       dataType: 'json',
       data:data
     }).done(function(response){
-      console.log(response);
-      $('edit_user').replaceWith(
-        $(HandlebarsTemplates['user_show'](response)));
-    }).fail(function(err){
-      console.log("User isn't editing", err);
-    });
+      if (response.errors){
+        response.errors.forEach(function(el, index, array){
+        $editForm.prepend( "<p>"+el+"</p>" );
+        });
+      } else {
+        $('.edit_user').replaceWith(
+          $(HandlebarsTemplates['user_show'](response)));
+        }
+      });
     });
 
  
