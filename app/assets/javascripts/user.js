@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('body').on('click','.userDelete', function(){
+  $('body').on('click','.userReviewDelete', function(){
     $idnum = $(this).parent().attr('id');
     $(this).parent().remove();
     console.log($idnum);
@@ -16,7 +16,7 @@ $(document).ready(function(){
   });
 
 //////// EDITING A REVIEW ////
-    $('body').on('click','.userEdit', function(){
+    $('body').on('click','.userReviewEdit', function(){
       $idnum = $(this).parent().attr('id');
       $this = $(this);
     /// GRAB INFO FROM DATABASE
@@ -51,4 +51,50 @@ $(document).ready(function(){
       console.log("EDIT FAIL!!!", err);
     });
     });
+
+//////// EDITING USER INFO ////
+    $('body').on('click','.userEdit', function(){
+      $idnum = $(this).attr('id');
+      $this = $(this);
+    /// GRAB INFO FROM DATABASE
+    $.ajax({
+      type: 'GET',
+      url: '/users/'+ $idnum,
+      dataType: 'json'
+    }).done(function(response){
+      console.log(response);
+      $this.parent().replaceWith(
+        $(HandlebarsTemplates['user_edit'](response)));
+    }).fail(function(err){
+      console.log("User not editing", err);
+    });
+
+
+    });
+
+     $('body').on('click','.userEditSub', function(){
+    /// GRAB INFO FROM EDIT FORM
+      var username = $('#user_username').val();
+      var email = $('#user_email').val();
+      var picture= $('#user_picture').val(); 
+      var bio= $('#user_bio').val(); 
+      var contact_link= $('#user_contact_link').val(); 
+      var data = {user: {username:username, email:email, picture:picture, bio:bio, contact_link:contact_link}};
+      
+    $.ajax({
+      type: 'PUT',
+      url: '/users/'+ $idnum,
+      dataType: 'json',
+      data:data
+    }).done(function(response){
+      console.log(response);
+      $('edit_user').replaceWith(
+        $(HandlebarsTemplates['user_show'](response)));
+    }).fail(function(err){
+      console.log("User isn't editing", err);
+    });
+    });
+
+ 
+
 });
