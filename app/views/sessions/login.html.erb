@@ -1,17 +1,17 @@
 <div class="panel panel-default text-center" style="width:100%">
     <div class="panel-body">
-      <h1>Login</h1>
+      <h1 class="login">Login</h1>
     </div>
     <ul class="list-group">
         <li class="list-group-item">
             <%= form_tag(login_path) do %>
-                <%= label_tag :username, nil, class:"control-label " %> 
+                <h4 class="text-left login_des"><%= label_tag :username, nil, class:"control-label " %></h4> 
                 <%= text_field_tag :username, params[:username], autofocus: true, class:"form-control"%> 
 
-                <h3><%= label_tag(:password)%></h3> 
-                <%= password_field_tag(:password)%> <br><br>
-
-                <%= submit_tag("Log in", class: "btn btn-success btn-lg") %> <br><br>
+                <h4 class="text-left login_des"><%= label_tag(:password)%></h4> 
+                <%= password_field_tag :password, params[:password], class:"form-control"%> <br><br>
+                <%= submit_tag("Log in", class: "btn btn-warning btn-md") %> <br><br>
+               
 
             <% end %>
             Don't have an account? <%= link_to "Sign up here!", signup_path%> <br>
