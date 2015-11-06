@@ -1,19 +1,19 @@
 <div class="panel panel-default text-center" style="width:100%">
     <div class="panel-body">
-        <h1><%= @school.name %></h1>
+        <h1 class="school_name_show"><%= @school.name %></h1>
         <hr>
     </div>
     <ul class="list-group">
         <li class="list-group-item">
             <div class="row">
                 <div class="col-md-1"></div>
-                <div class="col-md-3">
-                    <img src="<%= @school.logo %>" class="logoSchool">
-                    <p><%= @school.name %></p>
-                    <a href="<%= @school.webpage %>"><%= @school.webpage %></a>
-                    <p><%= @school.address %></p>
+                <div class="col-md-3 des_school">
+                    <img src="<%= @school.logo %>" class="logoSchool logo_image">
+                    <p class="header"><%= @school.name %></p>
+                    <a class="website" href="<%= @school.webpage %>"><%= @school.webpage %></a>
+                    <p class="location"><%= @school.address %></p>
                 </div>
-                <div class="col-md-7"><br><br>
+                <div class="col-md-7 des_school"><br><br>
                     <p><%= @school.description %></p>
                 </div>
                 <div class="col-md-1"></div>
@@ -21,22 +21,24 @@
         </li>   
         <li class="list-group-item">
             <hr>
-            <h2>REVIEWS</h2>
+            <h2 class="reviews">Reviews</h2>
             <% @school.reviews.each do |review| %>
             <hr>
                 <div class="row">
                     <div class="col-md-1"></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8"><h4><%= review.title %></h4></div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-7 title_reviews"><h4><%= review.title %></h4></div>
                     <div class="col-md-1"></div>
                 </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-2">
-                        <img src="<%= review.user.picture %>" class="miniPicture"><br>
-                        <%= review.user.username %>
+                <div class="row text-left">
+                    <div class="col-md-1 text-left"></div>
+                    <div class="col-md-3 text-left">
+                        <img src="<%= review.user.picture %>" class="miniPicture "><br>
+                        <p class="firm_title">
+                            <%= review.user.username %>
+                        </p>
                     </div>
-                    <div class="col-md-8 text-justify">
+                    <div class="col-md-7 text-justify review_des">
                     <%= review.description %>
                     <h4>Rating: <%= review.rating %></h4>
                     </div>

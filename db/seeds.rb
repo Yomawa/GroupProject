@@ -69,7 +69,7 @@ doc.css(".thumbnail-info").each do |main|
   description = main.at_css('.topic-summary').text unless main.at_css('.topic-summary').nil?
   #puts schoolname.text, "\n", address.text
    #binding.pry
-  School.create({name: schoolname, address: address, description: description, logo:'https://pbs.twimg.com/profile_images/420608140619431936/BB9NLLfh.png',webpage:'www.galvanize.com'})
+  School.create({name: schoolname, address: address, description: description, logo:'https://pbs.twimg.com/profile_images/466302895374077952/YEhmrkGJ_400x400.jpeg',webpage:'www.galvanize.com'})
 end
 
 

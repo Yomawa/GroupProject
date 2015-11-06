@@ -21,3 +21,134 @@
 .verticalLine {
     border-left: thick solid gray;
 }
+.nav_color{
+  background-color: #48c1ac;
+  border: #48c1ac;
+  letter-spacing: 2px;
+  /*width: 100;
+  height: 70px;*/
+  text-decoration: none;
+}
+.font_style{
+  font-size: 30px;
+  font-weight: bolder;
+  text-decoration: none;
+  text-decoration: none;
+  /*border: solid  2px;
+  padding-left: 3px;
+  padding-right:3px;
+  padding-top: -33px;
+  padding-bottom: -33px;*/
+}
+a:hover {
+  color: #ffa891;
+  text-decoration: none;
+}
+
+.nav_type_color{
+  text-decoration: none;
+  color: white;
+  /*padding: 10px;*/
+  padding-top: 10px;
+}
+.vertical_line{
+  color: #b5e3d8
+}
+
+.school_name{
+  font-size: 16px;
+  font-weight: bold;
+  /*color: #554488;*/
+  color: #330088;
+}
+.header{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  color: #330088;
+}
+.header_firm{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #330088;
+}
+.website{
+  font-size: 18px;
+  font-weight: normal;
+  text-align: left;
+  color: #939296;
+}
+.location{
+  color: #939296;
+}
+.school_name_show{
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #939296;
+}
+
+.logo_image{
+  font-size: 16px;
+  text-align: left;
+}
+.des_school{
+  text-align: left;
+  font-size: 20px;
+  color: #939296;
+}
+.image {
+    background-color: #ffbe9f;
+    }
+  .reviews {
+  font-size: 30px;
+  /*text-align: left;*/
+ /* text-transform: uppercase;*/
+
+  font-weight: bold;
+  color: #939296;
+  }
+  .title_reviews {
+  font-size: 25px;
+  text-align: left;
+  color: #330088;
+  /*text-transform: uppercase;*/
+  /*font-weight: bold;*/
+  }
+  .firm_title{
+    padding-top: 5px;
+    padding-left: 26px;
+  }
+
+  .review_des{
+    color: #939296;
+    font-size: 20px;
+  }
+  .user_title{
+    text-align: right;
+  }
+
+span.glyphicon-link {
+    font-size: 1.5em;
+}
+.button_right{
+  text-align: left;
+  padding-right: -60px;
+  margin-left: 0px;
+}
+
+/*    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); 
+  } }*/
+
+
+
+
+
+

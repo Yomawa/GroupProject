@@ -7,15 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default nav_color">
         <div class="container-fluid">
-          <div class="navbar-header">
-            <%= link_to "BOOTBACK", root_path, class: "navbar-brand" %>
+          <div class="navbar-header nav_type_color font_style">
+            <%= link_to "BOOTBACK", root_path, class: "nav_type_color" %>
           </div>
           <ul class="nav navbar-nav navbar-right">
             <% if !current_user %>
-              <%= link_to "Login", login_path, class: "navbar-brand" %>
-              <%= link_to "Sign up!", signup_path, class: "navbar-brand" %>
+              <%= link_to "login", login_path, class: "navbar-brand" %>
+              <%= link_to "sign up", signup_path, class: "navbar-brand" %>
             <% end %>
             <% if current_user %>
               <% if current_user.is_admin %>
@@ -49,15 +49,15 @@
         <%= yield %>
     </div>
     <hr>
-    <div class="container-fluid">
+    <div class="container-fluid vertical_line">
       <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-5 text-right">
+        <div class="col-md-1 vertical_line"></div>
+        <div class="col-md-5 text-right vertical_line">
           Janey  <br>
           Maja Bogeski <br>
           Miguel Angel González <br>
         </div>
-        <div class="col-md-5 text-left verticalLine">
+        <div class="col-md-5 text-left verticalLine vertical_line">
           Rails Proyect <br>
           Galvanize <br>
         </div>

@@ -5,8 +5,8 @@
     <ul class="list-group">
         <li class="list-group-item">
             <%= form_tag(login_path) do %>
-                <h3><%= label_tag(:username)%></h3>  
-                <%= text_field_tag(:username, params[:username], autofocus: true)%> 
+                <%= label_tag :username, nil, class:"control-label " %> 
+                <%= text_field_tag :username, params[:username], autofocus: true, class:"form-control"%> 
 
                 <h3><%= label_tag(:password)%></h3> 
                 <%= password_field_tag(:password)%> <br><br>
@@ -20,6 +20,11 @@
     </ul>
 </div>
 
+<!-- <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
+      </label> -->
 
 
 
