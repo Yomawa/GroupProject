@@ -34,6 +34,8 @@ gem 'bootswatch-rails'
 # gem 'unicorn'
 # Handlebars for single page templates
 gem 'handlebars_assets'
+gem 'rails_12factor', :group => :production
+gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
