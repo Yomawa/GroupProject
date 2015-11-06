@@ -1,40 +1,53 @@
-<h1>Admin Page</h1>
-
-
-<!-- All School with edit/delete -->
-<%= link_to '+ New School', new_school_path, class:"btn btn-success" %>
-<h3>All Schools</h3>
-
-  <% @schools.each do |school| %>
-    <div id="<%=school.id%>" >
-     <%= school.name %> 
-    <button class="adminEditSchool">Edit</button>
-    <button class="adminDeleteSchool">Delete</button>
-    
-     <!--  <li><%= school.name %><%= link_to "Delete School", school_path(school), method: :delete,class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
+<div class="panel panel-default text-center" style="width:100%">
+    <div class="panel-body">
+      <h1>Admin Page</h1>
     </div>
-  <% end %>
-<!-- All the Reviews with Delete -->
-<h3>All Reviews</h3>
-
-  <% @reviews.each do |review| %>
-  <div id="<%=review.id%>" >
-    <%= review.title %>
-    <button class="adminDeleteReview">Delete</button>
-    <!-- <li><%= review.title %><%= link_to "Delete this Review", review_path(review),class:"adminDelete", method: :delete, data:{confirm: 'Do you really want to delete?'}%></li> -->
-  </div>
-     <% end %>
-
-
-<!-- All the Users with Delete -->
-<h3>All Users</h3>
-  <% @users.each do |user| %>
-  <div id="<%=user.id%>">
-    <%= user.username %>
-    <% unless user.is_admin %>
-    <button class="adminDeleteUser">Delete</button>
-  </div>
-    <% end %>
-    <!-- <li><%= user.username %><%= link_to "Delete User", user_path(user), method: :delete, class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
-  <% end %>
-</ul>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <div class="row"> 
+            <div class="col-md-6"><h3>Schools</h3></div>
+            <div class="col-md-4"><h3>Reviews</h3></div>
+            <div class="col-md-2"><h3>Users</h3></div>
+          </div>
+        </li>   
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-6">
+              <!-- All School with edit/delete -->
+              <% @schools.each do |school| %>
+                <div id="<%=school.id%>" >
+                 <%= school.name %> <br>
+                <button class="btn btn-warning adminEditSchool">Edit</button>
+                <button class="btn btn-danger adminDeleteSchool">Delete</button>
+                
+                 <!--  <li><%= school.name %><%= link_to "Delete School", school_path(school), method: :delete,class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
+                </div>
+              <% end %> <br><br>
+              <%= link_to '+ New School', new_school_path, class:"btn btn-success" %>
+            </div>
+            <div class="col-md-4">
+              <!-- All the Reviews with Delete -->
+              <% @reviews.each do |review| %>
+                <div id="<%=review.id%>" > <hr>
+                  <%= review.title %> 
+                  <button class="btn btn-danger adminDeleteReview">Delete</button>
+                  <!-- <li><%= review.title %><%= link_to "Delete this Review", review_path(review),class:"adminDelete", method: :delete, data:{confirm: 'Do you really want to delete?'}%></li> -->
+                </div>
+              <% end %>
+            </div>
+            <div class="col-md-2">
+              <!-- All the Users with Delete -->
+              <% @users.each do |user| %>
+              <div id="<%=user.id%>"> <hr>
+                <%= user.username %>
+                <% unless user.is_admin %>
+                <button class="btn btn-danger adminDeleteUser">Delete</button>
+              </div>
+                <% end %>
+                <!-- <li><%= user.username %><%= link_to "Delete User", user_path(user), method: :delete, class:"adminDelete", data:{confirm: 'Do you really want to delete?'}%></li> -->
+              <% end %>
+            </div>
+          </div>   
+        </li>
+    </ul>
+</div>

@@ -1,18 +1,36 @@
+<br>
 <form class="edit_review">
-  <div class = "form-group">
-    <label for="review_title">Title</label>
-    <input type="text" value={{title}} name="review[title]" id="review_title" />
-  </div>
+  <div class="panel panel-default text-center" style="width:100%">
+    <div class="panel-body">
+        <h3>Edit Review</h3>
+    </div>
+    <div class="form-horizontal"> 
+      <fieldset>
 
-  <div class = "form-group">
-    <label for="review_description">Description</label>
-    <input type="text" value={{description}} name="review[description]" id="review_description" />
-  </div>
+        <div class = "form-group">
+          <label class="col-lg-2 control-label" for="review_title">Title</label>
+          <div class="col-lg-10">
+          <input type="text" value={{title}} name="review[title]" id="review_title" class="form-control"/>
+          </div>
+        </div>
 
-  <div class = "form-group">
-    <label for="review_rating">Rating</label>
-    <input type="text" value={{rating}} name="review[rating]" id="review_rating" />
+        <div class = "form-group">
+          <label class="col-lg-2 control-label" for="review_description">Description</label>
+          <div class="col-lg-10">
+          <input type="text" value="{{description}}" name="review[description]" id="review_description" class="form-control"/>
+          </div>
+        </div>
+
+        <div class = "form-group">
+          <label class="col-lg-2 control-label" for="review_rating">Rating</label>
+          <div class="col-lg-10">
+          <input type="text" value={{rating}} name="review[rating]" id="review_rating" class="form-control"/>
+          </div>
+        </div>
+
+        <input type="submit" name="commit" value="Update Review" class="btn btn-primary reviewEdit" /><br>
+
+      </fieldset>
+    </div>
   </div>
-    <input type="submit" name="commit" value="Update Review" class="btn btn-primary reviewEdit" />
-    
 </form>
