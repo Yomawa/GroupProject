@@ -6,7 +6,11 @@ class User < ActiveRecord::Base
 
     def generate_password_reset_token!
       update(reset_token: SecureRandom.urlsafe_base64(48))
-  
+    end
+
+    def reset_password!(new_password)
+    self.password = new_password
+    save!
     end
 end
 
